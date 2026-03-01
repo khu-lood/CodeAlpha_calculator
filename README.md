@@ -41,7 +41,7 @@ pink-premium-calculator/
 
 ## 🚀 Live Demo
 
-
+ https://khu-lood.github.io/CodeAlpha_calculator/
 
 ---
 
