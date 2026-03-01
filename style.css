@@ -1,0 +1,287 @@
+body {
+  background: #fce4ec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  background: #f8a5c2;
+  padding: 30px;
+  border-radius: 35px;
+  width: 370px;
+  box-shadow:
+    inset 0 10px 20px rgba(255,255,255,0.6),
+    inset 0 -10px 20px rgba(0,0,0,0.15),
+    0 30px 50px rgba(0,0,0,0.3);
+    
+}
+
+.top-section {
+  border-bottom: 3px solid #e48fb3;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+/* Solar Panel */
+.history-button{
+  width: 130px;
+  height: 30px;
+  color: #fbe7d8; /* beige */
+  background: linear-gradient(to right, #5d4037, #3e2723);
+  margin-bottom: 15px;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.4);
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.history-button:hover {
+  background: #5e2e2e;
+}
+
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Display */
+.display-wrapper {
+  background: #e0e0e0;
+  padding: 12px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow:
+    inset 0 4px 8px rgba(0,0,0,0.2),
+    0 0 10px rgba(255,182,193,0.4);
+}
+
+#display {
+  width: 100%;
+  height: 65px;
+  font-size: 26px;
+  text-align: right;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid #bdbdbd;
+  background: #ffffff;
+  box-sizing: border-box;   /* THIS FIXES RIGHT SHIFT */
+}
+
+.cursor::after {
+  content: "|";
+  animation: blink 1s infinite;
+  margin-left: 5px;
+}
+
+/* Button Layout */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Default Buttons */
+button {
+  height: 60px;
+  font-size: 20px;
+  border-radius: 14px;
+  border: 2px solid #c97ea3;
+  background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
+  box-shadow:
+    0 6px 0 #c97ea3,
+    0 10px 15px rgba(0,0,0,0.15),
+    inset 0 3px 6px rgba(255,255,255,0.8);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 6px 0 #c97ea3,
+    0 10px 15px rgba(0,0,0,0.2),
+    0 0 10px rgba(255,182,193,0.6);
+}
+
+
+button:active {
+  box-shadow:
+    0 2px 0 #c97ea3,
+    0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(4px);
+}
+
+.button-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+
+/* Operator Buttons */
+.operator {
+  background: linear-gradient(to bottom, #ffd6e0, #ffb3c6);
+  border: 2px solid #e091b1;
+  font-weight: bold;
+}
+
+
+/* Function Buttons */
+.function {
+  background: #ffc2d1;
+}
+
+/* Equal Button */
+.equal {
+  background: linear-gradient(to bottom, #ff8fab, #fb6f92);
+  color: white;
+  font-weight: bold;
+  border: 2px solid #d94f7b;
+}
+
+/* Zero Button */
+.zero {
+  grid-column: span 2;
+}
+
+.history-section {
+  margin-top: 25px;
+  background: #ffe6f0;
+  padding: 15px;
+  border-radius: 15px;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.history-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+#historyList li {
+  margin-bottom: 5px;
+  padding: 5px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.clear-history {
+  margin-top: 10px;
+  width: 100%;
+  height: 35px;
+  font-size: 14px;
+  background: #ff8fab;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Slide Panel */
+.history-panel {
+  position: absolute;
+  top: 0;
+  right: 0;   /* stick to calculator edge */
+
+  width: 100%;  /* SAME width as calculator */
+  height: 100%;
+
+  background: white;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+  border-radius: 30px;
+
+  transform: translateX(100%);  /* hide outside */
+  transition: transform 0.4s ease;
+
+  z-index: 10;
+}
+
+.calculator {
+  position: relative;
+  overflow: hidden;
+}
+
+.history-panel.active {
+  transform: translateX(0);   /* Slide outward */
+  
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.history-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+#historyList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+#historyList li {
+  background: white;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.history-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.history-item:hover {
+  background: #f5f5f5;
+}
+
+.clear-history-btn {
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  background: #ff5c8a;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
